@@ -402,7 +402,6 @@ def edit_student(request, student_id):
     form.fields['last_name'].initial = student.admin.last_name
     form.fields['address'].initial = student.address
     form.fields['course_id'].initial = student.course_id.id
-    form.fields['gender'].initial = student.gender
     form.fields['session_year_id'].initial = student.session_year_id.id
 
     context = {
@@ -429,7 +428,6 @@ def edit_student_save(request):
             last_name = form.cleaned_data['last_name']
             address = form.cleaned_data['address']
             course_id = form.cleaned_data['course_id']
-            gender = form.cleaned_data['gender']
             session_year_id = form.cleaned_data['session_year_id']
 
             # Getting Profile Pic first
@@ -462,7 +460,6 @@ def edit_student_save(request):
                 session_year_obj = SessionYearModel.objects.get(id=session_year_id)
                 student_model.session_year_id = session_year_obj
 
-                student_model.gender = gender
                 if profile_pic_url != None:
                     student_model.profile_pic = profile_pic_url
                 student_model.save()
