@@ -68,9 +68,9 @@ $  python3 -m venv venv
 
 Activate Virtual Environment
 
-For Windows
+For Windows, run the following file as admin
 ```
-$  source venv/scripts/activate
+\sys-admin-demo\venv\Scripts\activate.bat
 ```
 
 For Mac
@@ -137,3 +137,9 @@ Password: staff
 Email: student@gmail.com
 Password: student
 
+
+
+## deployment
+```
+python -m gunicorn student_management_system.asgi:application -k uvicorn.workers.UvicornWorker
+```
