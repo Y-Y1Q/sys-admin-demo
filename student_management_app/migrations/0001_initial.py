@@ -85,7 +85,6 @@ class Migration(migrations.Migration):
             name='Students',
             fields=[
                 ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('gender', models.CharField(max_length=50)),
                 ('profile_pic', models.FileField(upload_to='')),
                 ('address', models.TextField()),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
