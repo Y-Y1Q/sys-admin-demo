@@ -213,8 +213,7 @@ class Migration(migrations.Migration):
         migrations.RunSQL(
             """
             INSERT INTO student_management_app_sessionyearmodel (session_start_year, session_end_year) VALUES
-            ('2024-05-01', '2024-05-30'),
-            ('2024-01-01', '2024-12-31');
+            ('2024-05-01', '2024-05-30');
             """
         )
     ]
