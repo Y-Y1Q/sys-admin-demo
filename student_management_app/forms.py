@@ -1,6 +1,7 @@
 from django import forms 
 from django.forms import Form
 from student_management_app.models import Courses, SessionYearModel
+from asgiref.sync import sync_to_async
 
 
 class DateInput(forms.DateInput):
@@ -16,14 +17,14 @@ class AddStudentForm(forms.Form):
     address = forms.CharField(label="Address", max_length=50, widget=forms.TextInput(attrs={"class":"form-control"}))
 
     #For Displaying Courses
-    courses = Courses.objects.all()
+    courses = sync_to_async(Courses.objects.all)()
     course_list = []
     for course in courses:
         single_course = (course.id, course.course_name)
         course_list.append(single_course)
 
     #For Displaying Session Years
-    session_years = SessionYearModel.objects.all()
+    session_years = sync_to_async(SessionYearModel.objects.all)()
     session_year_list = []
     for session_year in session_years:
         single_session_year = (session_year.id, str(session_year.session_start_year)+" to "+str(session_year.session_end_year))
@@ -47,25 +48,19 @@ class EditStudentForm(forms.Form):
     address = forms.CharField(label="Address", max_length=50, widget=forms.TextInput(attrs={"class":"form-control"}))
 
     #For Displaying Courses
-    try:
-        courses = Courses.objects.all()
-        course_list = []
-        for course in courses:
-            single_course = (course.id, course.course_name)
-            course_list.append(single_course)
-    except:
-        course_list = []
+    courses = sync_to_async(Courses.objects.all)()
+    course_list = []
+    for course in courses:
+        single_course = (course.id, course.course_name)
+        course_list.append(single_course)
+  
 
     #For Displaying Session Years
-    try:
-        session_years = SessionYearModel.objects.all()
-        session_year_list = []
-        for session_year in session_years:
-            single_session_year = (session_year.id, str(session_year.session_start_year)+" to "+str(session_year.session_end_year))
-            session_year_list.append(single_session_year)
-            
-    except:
-        session_year_list = []
+    session_years = sync_to_async(SessionYearModel.objects.all)()
+    session_year_list = []
+    for session_year in session_years:
+        single_session_year = (session_year.id, str(session_year.session_start_year)+" to "+str(session_year.session_end_year))
+        session_year_list.append(single_session_year)
 
  
     course_id = forms.ChoiceField(label="Course", choices=course_list, widget=forms.Select(attrs={"class":"form-control"}))
