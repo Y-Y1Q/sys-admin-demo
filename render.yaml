@@ -1,7 +1,7 @@
 # student_management_system
 databases:
   - name: mysitedb
-    plan: starter
+    plan: free
     databaseName: mysite
     user: mysite
 
