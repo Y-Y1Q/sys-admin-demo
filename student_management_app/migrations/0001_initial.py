@@ -200,4 +200,21 @@ class Migration(migrations.Migration):
                 ('admin', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
+
+        migrations.RunSQL(
+            """
+            INSERT INTO student_management_app_courses (course_name, created_at, updated_at) VALUES
+            ('CSC651', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+            ('CSC101', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+            ('CSC999', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+            """
+        ),
+
+        migrations.RunSQL(
+            """
+            INSERT INTO student_management_app_sessionyearmodel (session_start_year, session_end_year) VALUES
+            ('2024-05-01', '2024-05-30'),
+            ('2024-01-01', '2024-12-31');
+            """
+        )
     ]
